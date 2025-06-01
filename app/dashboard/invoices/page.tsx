@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 export default async function Page({
   searchParams,
 } : {
-  searchParams: {
+  searchParams: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) {
   const { query = '', page } = await searchParams;
   const currentPage = Number(page) || 1;

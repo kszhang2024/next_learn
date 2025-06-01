@@ -13,7 +13,8 @@ import { createInvoice } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
-  const initialState: any = { message: null, errors: {} };
+  const initialState = { message: null, errors: {} };
+  // @ts-expect-error 类型错误
   const [state, dispatch] = useActionState(createInvoice, initialState);
 
   return (

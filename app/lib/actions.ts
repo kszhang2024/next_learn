@@ -58,7 +58,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     const amountInCents = amount * 100;
     const date = new Date().toISOString().split('T')[0];
 
-    const [res, error] = catchWrap(async () => {
+    const [, error] = catchWrap(async () => {
       await sql`
         INSERT INTO invoices (customer_id, amount, status, date)
         VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
@@ -91,7 +91,7 @@ export async function updateInvoice(prevState: State, id: string, formData: Form
   const { amount, status, customerId } = validatedFields.data;
   const amountInCents = amount * 100;
 
-  const [res, error] = catchWrap(async () => {
+  const [, error] = catchWrap(async () => {
     await sql`
       UPDATE invoices
       SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
@@ -106,7 +106,7 @@ export async function updateInvoice(prevState: State, id: string, formData: Form
 }
 
 export async function deleteInvoice(id: string) {
-  const [res, error] = catchWrap(async () => {
+  const [, error] = catchWrap(async () => {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
   });
 

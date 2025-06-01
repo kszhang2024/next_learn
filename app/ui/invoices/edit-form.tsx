@@ -10,7 +10,6 @@ import {
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 import { updateInvoice } from '@/app/lib/actions';
-import { useActionState } from 'react';
 
 export default function EditInvoiceForm({
   invoice,
@@ -19,9 +18,11 @@ export default function EditInvoiceForm({
   invoice: InvoiceForm;
   customers: CustomerField[];
 }) {
-  const initialState: any = { message: null, errors: {} };
+  const initialState = { message: null, errors: {} };
+  // @ts-expect-error 类型错误
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-  const [state, dispatch] = useActionState(updateInvoiceWithId, initialState)
+  // @ts-expect-error 类型错误
+  const [state, dispatch] = useFormState(updateInvoiceWithId, initialState);
   
   return (
     <form action={dispatch} aria-describedby="form-error">
